@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { of } from 'rxjs';
+import { getStates } from './getStates';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,9 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 export class AppComponent {
   title = 'formly';
   form = new FormGroup({});
-  model = { email: '', city: '' };
+  options: FormlyFormOptions = {};
+
+  model = { email: '', city: '', city2: '' };
   fields: FormlyFieldConfig[] = [
     {
       key: 'email',
@@ -29,10 +33,16 @@ export class AppComponent {
         label: 'City',
         placeholder: 'Type to search',
         required: true,
-        options: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
+        filter: (term: string) => of(term ? this.filterStates(term) : this.states.slice()),
       },
     },
   ];
+
+  states = getStates();
+
+  filterStates(name: string) {
+    return this.states.filter((state) => state.toLowerCase().includes(name.toLowerCase()));
+  }
 
   onSubmit(model: any) {
     console.log(model);

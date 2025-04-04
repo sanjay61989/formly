@@ -1,43 +1,34 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
-import { FormlyMaterialModule } from '@ngx-formly/material';
-import { MatButtonModule } from '@angular/material/button';
-import { CustomAutocompleteComponent } from './custom-autocomplete/custom-autocomplete.component';
-import { FormlyMatFormFieldModule } from '@ngx-formly/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+import { AutocompleteTypeComponent } from './autocomplete-type/autocomplete-type.component';
 @NgModule({
-  declarations: [AppComponent, CustomAutocompleteComponent],
+  declarations: [AppComponent, AutocompleteTypeComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormlyMaterialModule,
-    FormlyMatFormFieldModule,
-    MatButtonModule,
     BrowserAnimationsModule,
-    MatAutocompleteModule,
+    CommonModule,
+    FormlyMaterialModule,
+    ReactiveFormsModule,
     MatInputModule,
+    MatAutocompleteModule,
     FormlyModule.forRoot({
       types: [
         {
           name: 'autocomplete',
-          component: CustomAutocompleteComponent,
+          component: AutocompleteTypeComponent,
+          wrappers: ['form-field'],
         },
       ],
-      validationMessages: [
-        { name: 'required', message: 'Value dall chup chaap' },
-      ],
+      validationMessages: [{ name: 'required', message: 'Value Daal Chup Chaap' }],
     }),
   ],
   providers: [
