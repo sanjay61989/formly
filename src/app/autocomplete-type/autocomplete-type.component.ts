@@ -9,12 +9,21 @@ import { startWith, switchMap } from 'rxjs/operators';
   templateUrl: './autocomplete-type.component.html',
 })
 export class AutocompleteTypeComponent extends FieldType<FieldTypeConfig> implements OnInit {
-  filter: Observable<any>;
+  filter: Observable<any[]>;
 
   ngOnInit() {
     this.filter = this.formControl.valueChanges.pipe(
       startWith(''),
-      switchMap((term) => this.props.filter(term)),
-    );
+      switchMap((term) => {
+        if (typeof term === 'string') {
+          return this.props.filter(term);
+        }
+        return this.props.filter(term?.label || '');
+      }),
+    ) as Observable<any[]>;
+  }
+
+  displayFn(option: any): string {
+    return option ? option.label : '';
   }
 }

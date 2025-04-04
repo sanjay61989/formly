@@ -1,0 +1,35 @@
+.selcontainer {
+  width: 100% !important;
+  /* background-color: black !important; */
+}
+span {
+  display: block;
+  text-align: center; /* Ensures consistency with form fields */
+}
+
+mat-error {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+}
+.option-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+::ng-deep .mdc-list-item__primary-text {
+  margin: 0 !important;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+}
+::ng-deep .mat-mdc-option {
+  display: block !important;
+  min-height: unset !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+::ng-deep div.mat-mdc-autocomplete-panel {
+  padding: 0 !important;
+}

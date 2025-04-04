@@ -1,0 +1,26 @@
+<div style="display: flex">
+  <input
+    matInput
+    [matAutocomplete]="auto"
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [placeholder]="props.placeholder"
+    [errorStateMatcher]="errorStateMatcher"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    panelClass="selcontainer"
+    hideSingleSelectionIndicator="true"
+    disableRipple="true"
+    [displayWith]="displayLabelFn"
+    (optionSelected)="onOptionSelected($event.option.value)"
+  >
+    <mat-option *ngFor="let option of filteredOptions | async; trackBy: trackByIdFn" [value]="option">
+      <span> {{ option.label }} </span>
+      <svg *ngIf="option.selected" class="end-icon" width="20" height="20" viewBox="0 0 24 24">
+        <path fill="currentColor" [attr.d]="checkIconPath"></path>
+      </svg>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-icon matSuffix svgIcon="mdiArrowDownDropCircle"></mat-icon>
+</div>

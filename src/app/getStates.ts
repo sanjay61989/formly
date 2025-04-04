@@ -14,5 +14,5 @@ export function getStates(): any[] {
     { value: 'DE', label: 'Delaware' },
     { value: 'FL', label: 'Florida' },
     { value: 'GA', label: 'Georgia' },
-  ].map((d) => d.label);
+  ]; //.map((d) => d.label);
 }

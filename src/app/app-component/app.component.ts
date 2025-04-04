@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { of } from 'rxjs';
-import { getStates } from './getStates';
+import { getStates } from '../getStates';
+import { DropdownOption } from '../autocomplete-object/autocomplete-object.component';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,29 @@ import { getStates } from './getStates';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  //Data
+
+  //Config
   title = 'formly';
   form = new FormGroup({});
   options: FormlyFormOptions = {};
+  options2: DropdownOption[] = [
+    {
+      value: '1',
+      label: 'One',
+    },
+    {
+      value: '2',
+      label: 'Two',
+    },
+    {
+      value: '3',
+      label: 'Three',
+    },
+  ];
+  model = { email: '', city: '1' };
+  states = getStates();
 
-  model = { email: '', city: '', city2: '' };
   fields: FormlyFieldConfig[] = [
     {
       key: 'email',
@@ -33,16 +51,10 @@ export class AppComponent {
         label: 'City',
         placeholder: 'Type to search',
         required: true,
-        filter: (term: string) => of(term ? this.filterStates(term) : this.states.slice()),
+        options: this.options2,
       },
     },
   ];
-
-  states = getStates();
-
-  filterStates(name: string) {
-    return this.states.filter((state) => state.toLowerCase().includes(name.toLowerCase()));
-  }
 
   onSubmit(model: any) {
     console.log(model);
