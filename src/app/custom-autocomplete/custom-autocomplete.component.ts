@@ -1,29 +1,12 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
-import { FieldType, FieldTypeConfig, FormlyModule } from "@ngx-formly/core";
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 // material-autocomplete.type.ts
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {
-  MatAutocompleteModule,
-  MatAutocompleteTrigger,
-} from "@angular/material/autocomplete";
-import { MatInputModule } from "@angular/material/input";
-import { FormlyMaterialModule } from "@ngx-formly/material";
-import { map, startWith } from "rxjs";
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { map, startWith } from 'rxjs';
 @Component({
-  selector: "app-custom-autocomplete",
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    FormlyModule,
-    MatInputModule,
-    CommonModule,
-    FormlyMaterialModule,
-  ],
-  templateUrl: "./custom-autocomplete.component.html",
-  styleUrl: "./custom-autocomplete.component.scss",
+  selector: 'app-custom-autocomplete',
+  templateUrl: './custom-autocomplete.component.html',
+  styleUrl: './custom-autocomplete.component.scss',
 })
 export class CustomAutocompleteComponent
   extends FieldType<FieldTypeConfig>
@@ -37,7 +20,7 @@ export class CustomAutocompleteComponent
   ngAfterViewInit() {
     const filteredOptions = <any[]>this.props.options || [];
     this.filteredOptions$ = this.formControl.valueChanges.pipe(
-      startWith(""), // Start with an empty value
+      startWith(''), // Start with an empty value
       map((value) => this.filterOptions(value, filteredOptions)), // Filter options
     );
   }
